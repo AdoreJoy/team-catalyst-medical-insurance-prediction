@@ -17,10 +17,13 @@ st.write(
 # ---------------------------------------------------------------
 # Load the trained model and the exact column order it expects
 # ---------------------------------------------------------------
+import os
+
 @st.cache_resource
 def load_model():
-    model = joblib.load("model.pkl")
-    columns = joblib.load("model_columns.pkl")
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    model = joblib.load(os.path.join(base_dir, "model.pkl"))
+    columns = joblib.load(os.path.join(base_dir, "model_columns.pkl"))
     return model, columns
 
 model, model_columns = load_model()
